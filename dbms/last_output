@@ -1,0 +1,128 @@
+SQL*Plus: Release 12.1.0.2.0 Production on Sun Nov 12 15:26:50 2017
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> drop trigger14;
+drop trigger14
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option
+
+
+SQL> drop trigger trigger14;
+drop trigger trigger14
+*
+ERROR at line 1:
+ORA-04080: trigger 'TRIGGER14' does not exist
+
+
+SQL> drop trigger pro_percent14;
+
+Trigger dropped.
+
+SQL> @ex4.sql
+
+Trigger created.
+
+SQL> select profit_percent from product_master_aswin;
+
+PROFIT_PERCENT
+--------------
+	     4
+	     6
+	     5
+	     5
+	     2
+	     3
+
+6 rows selected.
+
+SQL> update product_master_aswin set profit_percent=2 where profit_percent=4;
+
+1 row updated.
+
+SQL> update product_master_aswin set profit_percent=100 where profit_percent=4;
+
+0 rows updated.
+
+SQL> update product_master_aswin set profit_percent=100 where profit_percent=6;
+
+1 row updated.
+
+SQL> Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+mca1614@mca-pc71:~/college/dbms/cycle_ii/problem_16$ ls
+ex4.sql  ex4.sql~  newtrigger.sql  newtrigger.sql~
+mca1614@mca-pc71:~/college/dbms/cycle_ii/problem_16$ db
+
+SQL*Plus: Release 12.1.0.2.0 Production on Sun Nov 12 15:36:17 2017
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> drop trigger trigger14;
+
+Trigger dropped.
+
+SQL> @db newtrigger.sql
+SP2-0310: unable to open file "db.sql"
+SQL> @newtrigger.sql
+
+Trigger created.
+
+
+Trigger created.
+
+SQL> drop trigger newtrigger;
+
+Trigger dropped.
+
+SQL> @newtrigger.sql
+
+Trigger created.
+
+
+Trigger created.
+
+SQL> insert into product_master_aswin values('p12340', 'Coprocessor', '1', 'Piece', '20', '5', '10000', '20000');
+insert into product_master_aswin values('p12340', 'Coprocessor', '1', 'Piece', '20', '5', '10000', '20000')
+            *
+ERROR at line 1:
+ORA-20001: New profit percent must be greater than Maximum profit percent
+ORA-06512: at "USER1.NEWTRIGGER", line 6
+ORA-04088: error during execution of trigger 'USER1.NEWTRIGGER'
+
+
+SQL> insert into product_master_aswin values('p12340', 'Coprocessor', '10', 'Piece', '20', '5', '10000', '20000');
+insert into product_master_aswin values('p12340', 'Coprocessor', '10', 'Piece', '20', '5', '10000', '20000')
+            *
+ERROR at line 1:
+ORA-20001: New profit percent must be greater than Maximum profit percent
+ORA-06512: at "USER1.NEWTRIGGER", line 6
+ORA-04088: error during execution of trigger 'USER1.NEWTRIGGER'
+
+
+SQL> insert into product_master_aswin values('p12340', 'Coprocessor', '30', 'Piece', '20', '5', '10000', '20000');
+insert into product_master_aswin values('p12340', 'Coprocessor', '30', 'Piece', '20', '5', '10000', '20000')
+            *
+ERROR at line 1:
+ORA-20001: New profit percent must be greater than Maximum profit percent
+ORA-06512: at "USER1.NEWTRIGGER", line 6
+ORA-04088: error during execution of trigger 'USER1.NEWTRIGGER'
+
+
+SQL> insert into product_master_aswin values('p12340', 'Coprocessor', '100', 'Piece', '20', '5', '10000', '20000');
+
+1 row created.
+
+SQL> Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+

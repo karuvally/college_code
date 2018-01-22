@@ -1,0 +1,242 @@
+SQL> select to_char(order_date) from sales_order_aswin where to_char(order_date) like '%MAY
+
+TO_CHAR(O
+---------
+20-MAY-96
+24-MAY-96
+
+
+SQL> select salesman_no from salesman_master_aswin where salesman_no like 's00001' or sales
+
+SALESM
+------
+s00001
+s00002
+
+
+SQL> select product_no, description from product_master_aswin where sell_price > 2000 and s
+ell_price <= 5000;
+
+PRODUC
+------
+DESCRIPTION
+--------------------------------------------------------------------------------
+p44783
+Keyboards
+
+
+SQL> update product_master_aswin set sell_price = (20/100)*sell_price where sell_price > 30
+00;
+
+4 rows updated.
+
+
+SQL> select count(product_no) from product_master_aswin;
+
+COUNT(PRODUCT_NO)
+-----------------
+        6
+
+
+SQL> select count(order_status) from sales_order_aswin where order_status like 'fulfilled';
+
+COUNT(ORDER_STATUS)
+-------------------
+          2
+
+
+
+SQL> select avg(sell_price) from product_master_aswin;
+
+AVG(SELL_PRICE)
+---------------
+     1222.5
+
+
+SQL> select order_no, to_char(order_date, 'day') from sales_order_aswin;
+
+ORDER_ TO_CHAR(O
+------ ---------
+o19001 friday
+o19002 thursday
+o46865 sunday
+o19003 wednesday
+o46866 monday
+o19008 friday
+
+6 rows selected.
+
+
+SQL> select order_no, to_char(dely_date, 'dd-mon') from sales_order_aswin;
+
+ORDER_ TO_CHA
+------ ------
+o19001 20-jan
+o19002 27-jan
+o46865 20-feb
+o19003 07-apr
+o46866 22-may
+o19008 26-may
+
+6 rows selected.
+
+
+SQL> select to_char(order_date, 'dd/mon/yyyy') from sales_order_aswin;
+
+TO_CHAR(ORD
+-----------
+12/jan/1996
+25/jan/1996
+18/feb/1996
+03/apr/1996
+20/may/1996
+24/may/1996
+
+6 rows selected.
+
+
+SQL> select to_number(to_char(sysdate, 'dd')) + 15 from dual;
+
+TO_NUMBER(TO_CHAR(SYSDATE,'DD'))+15
+-----------------------------------
+                 25
+
+
+SQL> select dely_date - order_date from sales_order_aswin;
+
+DELY_DATE-ORDER_DATE
+--------------------
+           8
+           2
+           2
+           4
+           2
+           2
+
+6 rows selected.
+
+
+SQL> select item, sum(price) from item_order_aswin group by(item);
+
+ITEM            SUM(PRICE)    
+--------------- ----------    
+Printer               3000    
+Mouse                 1000    
+Keyboard              1600    
+Monitor               2000    
+
+
+SQL> select cust_name, count(item) from item_order_aswin where cust_name='Ivan' group by cu
+st_name;
+
+CUST_NAME       COUNT(ITEM)
+--------------- -----------                                                     
+Ivan    
+
+
+SQL> select address, count(item) from item_order_aswin where address='Juhu' group by addres
+s;
+
+ADDRESS         COUNT(ITEM)                                                     
+--------------- -----------                                                    
+Juhu                      2   
+
+
+SQL> select address, count(item) from item_order_aswin where address='Juhu' group by addres
+s;
+
+SQL> select cust_name, sum(price) from item_order_aswin having sum(price)>2000 group by cust_name;
+
+CUST_NAME	SUM(PRICE)
+--------------- ----------
+Ivan		      2300
+
+
+SQL> select name from clientmaster_aswin where client_no in (select client_no from sales_or
+der_aswin where order_no like 'o19001');
+
+NAME         
+---------------    
+Ivan Bayross   
+
+
+SQL> select name from clientmaster_aswin where client_no in (select client_no from sales_or
+der_aswin where order_date < '01-may-96');
+
+NAME         
+---------------    
+Ivan Bayross    
+Vandana Saitwa    
+Pramadajagust  
+
+
+SQL> select client_no, name from clientmaster_aswin where client_no in (select client_no fr
+om sales_order_aswin where order_no in (select order_no from sales_order_details_aswin wher
+e product_no in (select product_no from product_master_aswin where description like '1.44 f
+loppies')));
+
+CLIENT NAME
+------ ---------------
+c00001 Ivan Bayross
+c00002 Vandana Saitwa
+c00003 Pramadajagust
+c00005 Ravisreedharan
+
+
+SQL> select product_no, description from product_master_aswin where product_no not in (sele
+ct product_no from sales_order_details_aswin);
+
+PRODUC
+------
+DESCRIPTION
+--------------------------------------------------------------------------------
+p35412
+540 HDD
+
+p44783
+Keyboards
+
+p45123
+CD Drive
+
+
+PRODUC
+------
+DESCRIPTION
+--------------------------------------------------------------------------------
+p45789
+Mouse
+
+
+SQL> select name from clientmaster_aswin where client_no in(select client_no from sales_ord
+er_aswin where order_no in(select order_no from sales_order_details_aswin where product_no 
+in(select product_no from product_master_aswin where cost_price > 10000)));
+
+NAME
+---------------
+Ivan Bayross
+Pramadajagust
+
+
+SQL> create view client_master_view_aswin as
+  2  select client_no, name, city from clientmaster_aswin;
+
+View created.
+
+
+SQL> update client_master_view_aswin set city='Chennai' where city = 'Madras';
+
+1 row updated.
+
+SQL> select * from client_master_view_aswin;
+
+CLIENT NAME            CITY
+------ --------------- ---------------
+c00001 Ivan Bayross    Mumbai
+c00002 Vandana Saitwa  Chennai
+c00003 Pramadajagust   Mumbai
+c00004 Basu navindgi   Mumbai
+c00005 Ravisreedharan  Delhi
+c00006 Rukmini         Mumbai
+c00007 Suhasini        Navi
+

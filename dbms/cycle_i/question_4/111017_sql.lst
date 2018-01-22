@@ -1,0 +1,1005 @@
+QL*Plus: Release 12.1.0.2.0 Production on Wed Oct 11 09:11:53 2017
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> select * from sales_order_aswin;
+
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+o19001 12-JAN-96 c00001
+Wandon
+s00001 F N 20-JAN-96 in process
+
+o19002 25-JAN-96 c00002
+Don Street
+s00002 P N 27-JAN-96 cancelled
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+
+o46865 18-FEB-96 c00003
+Mandon
+s00003 F Y 20-FEB-96 fulfilled
+
+o19003 03-APR-96 c00001
+Jerome
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+s00001 F Y 07-APR-96 fulfilled
+
+o46866 20-MAY-96 c00004
+Dadar
+s00002 P N 22-MAY-96 cancelled
+
+o19008 24-MAY-96 c00005
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+Rourk
+s00004 F N 26-MAY-96 in process
+
+
+6 rows selected.
+
+SQL> SQL> select salesm from sales_order_aswin;
+select salesm from sales_order_aswin
+       *
+ERROR at line 1:
+ORA-00904: "SALESM": invalid identifier
+
+
+SQL> select salesman from sales_order_aswin;
+select salesman from sales_order_aswin
+       *
+ERROR at line 1:
+ORA-00904: "SALESMAN": invalid identifier
+
+
+SQL> desc sales_order_aswin;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO				   NOT NULL VARCHAR2(6)
+ ORDER_DATE					    DATE
+ CLIENT_NO					    VARCHAR2(6)
+ DELY_ADDR					    VARCHAR2(100)
+ SALESMAN_NO					    VARCHAR2(6)
+ DELY_TYPE					    CHAR(1)
+ BILLED_YN					    CHAR(1)
+ DELY_DATE					    DATE
+ ORDER_STATUS					    VARCHAR2(15)
+
+SQL> select order_no from sales_order_aswin where month(dely_date) == 'Jun';
+select order_no from sales_order_aswin where month(dely_date) == 'Jun'
+                                                               *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select order_no from sales_order_aswin where month(dely_date) = 'Jun';
+select order_no from sales_order_aswin where month(dely_date) = 'Jun'
+                                             *
+ERROR at line 1:
+ORA-00904: "MONTH": invalid identifier
+
+
+SQL> select order_no from sales_order_aswin where
+  2  to_char(order_date, 'Mon') = 'Jun';
+
+no rows selected
+
+SQL> select * from sales_order_aswin;
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+o19001 12-JAN-96 c00001
+Wandon
+s00001 F N 20-JAN-96 in process
+
+o19002 25-JAN-96 c00002
+Don Street
+s00002 P N 27-JAN-96 cancelled
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+
+o46865 18-FEB-96 c00003
+Mandon
+s00003 F Y 20-FEB-96 fulfilled
+
+o19003 03-APR-96 c00001
+Jerome
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+s00001 F Y 07-APR-96 fulfilled
+
+o46866 20-MAY-96 c00004
+Dadar
+s00002 P N 22-MAY-96 cancelled
+
+o19008 24-MAY-96 c00005
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+Rourk
+s00004 F N 26-MAY-96 in process
+
+
+6 rows selected.
+
+SQL> select order_no from sales_order_aswin where
+  2  to_char(order_date, 'mon') = 'May';
+
+no rows selected
+
+SQL> to_char(order_date, 'mon') = 'MAY';
+SP2-0734: unknown command beginning "to_char(or..." - rest of line ignored.
+SQL> select order_no from sales_order_aswin where to_char(order_date, 'mon') = 'MAY';
+
+no rows selected
+
+SQL> select order_date from slaes_order_aswin;
+select order_date from slaes_order_aswin
+                       *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select order_date_from sales_order_aswin;
+select order_date_from sales_order_aswin
+                                       *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select * from sales_order_aswin;
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+o19001 12-JAN-96 c00001
+Wandon
+s00001 F N 20-JAN-96 in process
+
+o19002 25-JAN-96 c00002
+Don Street
+s00002 P N 27-JAN-96 cancelled
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+
+o46865 18-FEB-96 c00003
+Mandon
+s00003 F Y 20-FEB-96 fulfilled
+
+o19003 03-APR-96 c00001
+Jerome
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+s00001 F Y 07-APR-96 fulfilled
+
+o46866 20-MAY-96 c00004
+Dadar
+s00002 P N 22-MAY-96 cancelled
+
+o19008 24-MAY-96 c00005
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+Rourk
+s00004 F N 26-MAY-96 in process
+
+
+6 rows selected.
+
+SQL> select order_date from sales_order_aswin;
+
+ORDER_DAT
+---------
+12-JAN-96
+25-JAN-96
+18-FEB-96
+03-APR-96
+20-MAY-96
+24-MAY-96
+
+6 rows selected.
+
+SQL> select order_date from sales_order_aswin where order_date = '__-MAY-__';
+select order_date from sales_order_aswin where order_date = '__-MAY-__'
+                                                            *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected
+
+
+SQL> select order_date from sales_order_aswin where to_char(order_date) = '__-MAY-__';
+
+no rows selected
+
+SQL> select order_date from sales_order_aswin where to_char(order_date) = '%MAY%';
+
+no rows selected
+
+SQL> select to_char(order_date) from sales_order_aswin
+  2  ;
+
+TO_CHAR(O
+---------
+12-JAN-96
+25-JAN-96
+18-FEB-96
+03-APR-96
+20-MAY-96
+24-MAY-96
+
+6 rows selected.
+
+SQL> select to_char(order_date) from sales_order_aswin where to_char(order_date) like '%MAY
+  2  %';
+
+no rows selected
+
+SQL> select to_char(order_date) from sales_order_aswin where to_char(order_date) like '%MAY%';
+
+TO_CHAR(O
+---------
+20-MAY-96
+24-MAY-96
+
+SQL> select salesman_no from salesman_master_aswin;
+
+SALESM
+------
+s00001
+s00002
+s00003
+s00004
+
+SQL> select salesman_no from salesman_master_aswin where salesman_no like 's00001' and salesman_no like 's00002';
+
+no rows selected
+
+SQL> select salesman_no from salesman_master_aswin where salesman_no like 's00001';
+
+SALESM
+------
+s00001
+
+SQL> select salesman_no from salesman_master_aswin where salesman_no like 's00001' or salesman_no like 's00002';
+
+SALESM
+------
+s00001
+s00002
+
+SQL> set line 1000;
+SQL> select * from salesman_master_aswin;
+
+SALESM SALESMAN_NAME   ADDRESS_1											    CITY	       PINCODE STATE		  SAL_AMT TGT_TO_GET  TTD_SALES REMARKS
+------ --------------- ---------------------------------------------------------------------------------------------------- --------------- ---------- --------------- ---------- ---------- ---------- ----------------------------------------------------------------------------------------------------
+s00001 Kiran	       a/14												    Worli		450001 Bombay		     3000	 100	     50 Good
+s00002 Maneesh	       j-65												    Nariman		450001 Bombay		     3000	 200	    100 Good
+s00003 Ravi	       p-7												    Bandra		400003 Bombay		     3000	 200	    100 Good
+s00004 Ashish	       a/5												    Juhu		400041 Bombay		     3000	 200	    150 Good
+
+SQL> set line 500;
+SQL> select * from salesman_master_aswin;
+
+SALESM SALESMAN_NAME   ADDRESS_1											    CITY	       PINCODE STATE		  SAL_AMT TGT_TO_GET  TTD_SALES REMARKS
+------ --------------- ---------------------------------------------------------------------------------------------------- --------------- ---------- --------------- ---------- ---------- ---------- ----------------------------------------------------------------------------------------------------
+s00001 Kiran	       a/14												    Worli		450001 Bombay		     3000	 100	     50 Good
+s00002 Maneesh	       j-65												    Nariman		450001 Bombay		     3000	 200	    100 Good
+s00003 Ravi	       p-7												    Bandra		400003 Bombay		     3000	 200	    100 Good
+s00004 Ashish	       a/5												    Juhu		400041 Bombay		     3000	 200	    150 Good
+
+SQL> set line 1000;
+SQL> select * from product_master_aswin;
+
+PRODUC DESCRIPTION											    PROFIT_PERCENT UNIT_MEASURE    QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE
+------ ---------------------------------------------------------------------------------------------------- -------------- --------------- ----------- ----------- ---------- ----------
+p00001 1.44 floppies													 5 Piece		   100		20	  525	     500
+p03453 Monitors 													 6 Piece		    10		 3	12000	   11280
+p45789 Mouse														 5 Piece		    20		 5	 1050	    1000
+p44783 Keyboards													 5 Piece		   100		20	 3150	    3050
+p45123 CD Drive 													 2 Piece		    10		 3	 5250	    5100
+p35412 540 HDD														 3 Piece		    10		 3	 8400	    8000
+
+6 rows selected.
+
+SQL> select * from sales_order_details_aswin;
+
+ORDER_ PRODUC QTY_ORDERED QTY_NUMBER PRODUCT_RATE
+------ ------ ----------- ---------- ------------
+o19001 p00001		4	   4	      525
+o19002 p00001	       10	   0	      525
+o46865 p00001	       10	  10	      525
+o46865 p03453		4	   4	     1050
+o19003 p03453		2	   2	     1050
+o19008 p00001	       10	   5	      525
+
+6 rows selected.
+
+SQL> desc salesman_details_aswin;
+ERROR:
+ORA-04043: object salesman_details_aswin does not exist
+
+
+SQL> desc salesman_master_aswin;
+ Name										   Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ SALESMAN_NO									   NOT NULL VARCHAR2(6)
+ SALESMAN_NAME									   NOT NULL VARCHAR2(15)
+ ADDRESS_1									   NOT NULL VARCHAR2(100)
+ CITY										    VARCHAR2(15)
+ PINCODE									    NUMBER(38)
+ STATE										    VARCHAR2(15)
+ SAL_AMT									   NOT NULL NUMBER(38)
+ TGT_TO_GET									   NOT NULL NUMBER(38)
+ TTD_SALES									   NOT NULL NUMBER(38)
+ REMARKS									    VARCHAR2(100)
+
+SQL> set line 80
+SQL> desc salesman_master_aswin;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SALESMAN_NO				   NOT NULL VARCHAR2(6)
+ SALESMAN_NAME				   NOT NULL VARCHAR2(15)
+ ADDRESS_1				   NOT NULL VARCHAR2(100)
+ CITY						    VARCHAR2(15)
+ PINCODE					    NUMBER(38)
+ STATE						    VARCHAR2(15)
+ SAL_AMT				   NOT NULL NUMBER(38)
+ TGT_TO_GET				   NOT NULL NUMBER(38)
+ TTD_SALES				   NOT NULL NUMBER(38)
+ REMARKS					    VARCHAR2(100)
+
+SQL> select salesman_no, salesman_name, city from salesman_master_aswin where salesman_no like 's00001' or salesman_no like 's00002';
+
+SALESM SALESMAN_NAME   CITY
+------ --------------- ---------------
+s00001 Kiran	       Worli
+s00002 Maneesh	       Nariman
+
+SQL> desc sales_master_aswin;
+ERROR:
+ORA-04043: object sales_master_aswin does not exist
+
+
+SQL> desc sales_master_aswin;
+ERROR:
+ORA-04043: object sales_master_aswin does not exist
+
+
+SQL> desc product_master_aswin;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCT_NO				   NOT NULL VARCHAR2(6)
+ DESCRIPTION				   NOT NULL VARCHAR2(100)
+ PROFIT_PERCENT 				    NUMBER(38)
+ UNIT_MEASURE					    VARCHAR2(15)
+ QTY_ON_HAND					    NUMBER(38)
+ REORDER_LVL					    NUMBER(38)
+ SELL_PRICE					    NUMBER(38)
+ COST_PRICE					    NUMBER(38)
+
+SQL> desc salesman_Master_aswin;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SALESMAN_NO				   NOT NULL VARCHAR2(6)
+ SALESMAN_NAME				   NOT NULL VARCHAR2(15)
+ ADDRESS_1				   NOT NULL VARCHAR2(100)
+ CITY						    VARCHAR2(15)
+ PINCODE					    NUMBER(38)
+ STATE						    VARCHAR2(15)
+ SAL_AMT				   NOT NULL NUMBER(38)
+ TGT_TO_GET				   NOT NULL NUMBER(38)
+ TTD_SALES				   NOT NULL NUMBER(38)
+ REMARKS					    VARCHAR2(100)
+
+SQL> select product_no, description from product_master_aswin where sell_price > 2000;
+
+PRODUC
+------
+DESCRIPTION
+--------------------------------------------------------------------------------
+p03453
+Monitors
+
+p44783
+Keyboards
+
+p45123
+CD Drive
+
+
+PRODUC
+------
+DESCRIPTION
+--------------------------------------------------------------------------------
+p35412
+540 HDD
+
+
+SQL> select product_no, description from product_master_aswin where sell_price > 2000 and sell_price <= 5000;
+
+PRODUC
+------
+DESCRIPTION
+--------------------------------------------------------------------------------
+p44783
+Keyboards
+
+
+SQL> select product_no, description from product_master_aswin where sell_price > 2000 and sell_price < 5000;
+
+PRODUC
+------
+DESCRIPTION
+--------------------------------------------------------------------------------
+p44783
+Keyboards
+
+
+SQL> select product_no, description from product_master_aswin where sell_price > 2000;
+
+PRODUC
+------
+DESCRIPTION
+--------------------------------------------------------------------------------
+p03453
+Monitors
+
+p44783
+Keyboards
+
+p45123
+CD Drive
+
+
+PRODUC
+------
+DESCRIPTION
+--------------------------------------------------------------------------------
+p35412
+540 HDD
+
+
+SQL> select product_no, description from product_master_aswin where sell_price > 2000 and sell_price <= 5000;
+
+PRODUC
+------
+DESCRIPTION
+--------------------------------------------------------------------------------
+p44783
+Keyboards
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select product_id from product_master_aswin where sell_price > 3000;
+select product_id from product_master_aswin where sell_price > 3000
+       *
+ERROR at line 1:
+ORA-00904: "PRODUCT_ID": invalid identifier
+
+
+SQL> desc product_master_aswin;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCT_NO				   NOT NULL VARCHAR2(6)
+ DESCRIPTION				   NOT NULL VARCHAR2(100)
+ PROFIT_PERCENT 				    NUMBER(38)
+ UNIT_MEASURE					    VARCHAR2(15)
+ QTY_ON_HAND					    NUMBER(38)
+ REORDER_LVL					    NUMBER(38)
+ SELL_PRICE					    NUMBER(38)
+ COST_PRICE					    NUMBER(38)
+
+SQL> select product_no from product_master_aswin where sell_price > 3000;
+
+PRODUC
+------
+p03453
+p44783
+p45123
+p35412
+
+SQL> update product_master_aswin set sell_price = (20/100)*sell_price where sell_price > 3000;
+
+4 rows updated.
+
+SQL> select count(product_id) from product_master_table;
+select count(product_id) from product_master_table
+                              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select count(product_id) from product_master_aswin;
+select count(product_id) from product_master_aswin
+             *
+ERROR at line 1:
+ORA-00904: "PRODUCT_ID": invalid identifier
+
+
+SQL> desc product_master_aswin;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCT_NO				   NOT NULL VARCHAR2(6)
+ DESCRIPTION				   NOT NULL VARCHAR2(100)
+ PROFIT_PERCENT 				    NUMBER(38)
+ UNIT_MEASURE					    VARCHAR2(15)
+ QTY_ON_HAND					    NUMBER(38)
+ REORDER_LVL					    NUMBER(38)
+ SELL_PRICE					    NUMBER(38)
+ COST_PRICE					    NUMBER(38)
+
+SQL> select count(product_no) from product_master_aswin;
+
+COUNT(PRODUCT_NO)
+-----------------
+		6
+
+SQL> select * from sales_order_table;
+select * from sales_order_table
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from sales_order_aswin;
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+o19001 12-JAN-96 c00001
+Wandon
+s00001 F N 20-JAN-96 in process
+
+o19002 25-JAN-96 c00002
+Don Street
+s00002 P N 27-JAN-96 cancelled
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+
+o46865 18-FEB-96 c00003
+Mandon
+s00003 F Y 20-FEB-96 fulfilled
+
+o19003 03-APR-96 c00001
+Jerome
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+s00001 F Y 07-APR-96 fulfilled
+
+o46866 20-MAY-96 c00004
+Dadar
+s00002 P N 22-MAY-96 cancelled
+
+o19008 24-MAY-96 c00005
+
+ORDER_ ORDER_DAT CLIENT
+------ --------- ------
+DELY_ADDR
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS
+------ - - --------- ---------------
+Rourk
+s00004 F N 26-MAY-96 in process
+
+
+6 rows selected.
+
+SQL> select count(order_status) from sales_order_aswin where order_status like 'fulfilled';
+
+COUNT(ORDER_STATUS)
+-------------------
+		  2
+
+SQL> select avg(sell_price) from product_master_aswin;
+
+AVG(SELL_PRICE)
+---------------
+	 1222.5
+
+SQL> select order_no from sales_order_aswin;
+
+ORDER_
+------
+o19001
+o19002
+o19003
+o19008
+o46865
+o46866
+
+6 rows selected.
+
+SQL> select order_no, order_date from sales_order_aswin;
+
+ORDER_ ORDER_DAT
+------ ---------
+o19001 12-JAN-96
+o19002 25-JAN-96
+o46865 18-FEB-96
+o19003 03-APR-96
+o46866 20-MAY-96
+o19008 24-MAY-96
+
+6 rows selected.
+
+SQL> select order_no, to_char(order_date, day) from sales_order_aswin;
+select order_no, to_char(order_date, day) from sales_order_aswin
+                                     *
+ERROR at line 1:
+ORA-00904: "DAY": invalid identifier
+
+
+SQL> select order_no, to_char(order_date, 'day') from sales_order_aswin;
+
+ORDER_ TO_CHAR(O
+------ ---------
+o19001 friday
+o19002 thursday
+o46865 sunday
+o19003 wednesday
+o46866 monday
+o19008 friday
+
+6 rows selected.
+
+SQL> select order_no, to_char(dely_datee, 'dd-mon') from sales_order_aswin;
+select order_no, to_char(dely_datee, 'dd-mon') from sales_order_aswin
+                         *
+ERROR at line 1:
+ORA-00904: "DELY_DATEE": invalid identifier
+
+
+SQL> select order_no, to_char(dely_date, 'dd-mon') from sales_order_aswin;
+
+ORDER_ TO_CHA
+------ ------
+o19001 20-jan
+o19002 27-jan
+o46865 20-feb
+o19003 07-apr
+o46866 22-may
+o19008 26-may
+
+6 rows selected.
+
+SQL> select to_char(order_date, 'dd/mon/yyyy') from sales_order_aswin;
+
+TO_CHAR(ORD
+-----------
+12/jan/1996
+25/jan/1996
+18/feb/1996
+03/apr/1996
+20/may/1996
+24/may/1996
+
+6 rows selected.
+
+SQL> select sysdate;
+select sysdate
+             *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> sysdate
+SP2-0042: unknown command "sysdate" - rest of line ignored.
+SQL> hello
+SP2-0042: unknown command "hello" - rest of line ignored.
+SQL> select to_char(sysdate);
+select to_char(sysdate)
+                      *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SYSDATE;
+SP2-0042: unknown command "SYSDATE" - rest of line ignored.
+SQL> select SYSDATE;
+select SYSDATE
+             *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select to_char(sysdate, 'dd');
+select to_char(sysdate, 'dd')
+                            *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select to_char(sysdate, 'dd') "NOW" from dual;
+
+NO
+--
+10
+
+SQL> select to_char(sysdate, 'dd') from dual;
+
+TO
+--
+10
+
+SQL> select to_char(sysdate, 'dd + 15') from dual;
+select to_char(sysdate, 'dd + 15') from dual
+                        *
+ERROR at line 1:
+ORA-01821: date format not recognized
+
+
+SQL> select to_char(sysdate, 'dd') from dual;
+
+TO
+--
+10
+
+SQL> select getdate();
+select getdate()
+               *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select dateadd(day, -30, getdate());
+select dateadd(day, -30, getdate())
+                                  *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select dateadd(day, -30, getdate())
+  2  
+SQL> select blabla from table where blabla like SYSDATE + 14;
+select blabla from table where blabla like SYSDATE + 14
+                         *
+ERROR at line 1:
+ORA-00906: missing left parenthesis
+
+
+SQL> select to_char(sysdate, 'dd') from dual;
+
+TO
+--
+10
+
+SQL> select bla from table where bla > SYSDATE +14;
+select bla from table where bla > SYSDATE +14
+                      *
+ERROR at line 1:
+ORA-00906: missing left parenthesis
+
+
+SQL> select to_char(sysdate, 'dd') from dual;
+
+TO
+--
+10
+
+SQL> select to_int(sysdate, 'dd') from dual;
+select to_int(sysdate, 'dd') from dual
+       *
+ERROR at line 1:
+ORA-00904: "TO_INT": invalid identifier
+
+
+SQL> select to_char(sysdate, 'dd') from dual + 10;
+select to_char(sysdate, 'dd') from dual + 10
+                                        *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select to_number(sysdate, 'dd') from dual;
+select to_number(sysdate, 'dd') from dual
+                          *
+ERROR at line 1:
+ORA-01481: invalid number format model
+
+
+SQL> select to_char(sysdate, 'dd') from dual;
+
+TO
+--
+10
+
+SQL> select to_number(to_char(sysdate, 'dd')) from dual;
+
+TO_NUMBER(TO_CHAR(SYSDATE,'DD'))
+--------------------------------
+			      10
+
+SQL> select to_number(to_char(sysdate, 'dd')) from dual + 10;
+select to_number(to_char(sysdate, 'dd')) from dual + 10
+                                                   *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> declare @current_date INT
+  2  ;
+  3  ;
+  4  
+SQL> Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+mca1614@mca-pc71:~/college/dbms/cycle_i/question_3$ db
+
+SQL*Plus: Release 12.1.0.2.0 Production on Wed Oct 11 10:13:58 2017
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> define val_1 = 5;
+SQL> val_1
+SP2-0042: unknown command "val_1" - rest of line ignored.
+SQL> val_1;
+SP2-0042: unknown command "val_1" - rest of line ignored.
+SQL> select * from val_1;
+select * from val_1
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> val_1 + 5;
+SP2-0042: unknown command "val_1 + 5" - rest of line ignored.
+SQL> select newdate from val_1 where newdate = val_1 + 5;
+select newdate from val_1 where newdate = val_1 + 5
+                    *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select 3 + 5 from dua;
+select 3 + 5 from dua
+                  *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select 3 + 5 from dual;
+
+       3+5
+----------
+	 8
+
+SQL> select to_number(to_char(sysdate, 'dd') from dual;
+select to_number(to_char(sysdate, 'dd') from dual
+                                        *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select to_number(to_char(sysdate, 'dd')) from dual;
+
+TO_NUMBER(TO_CHAR(SYSDATE,'DD'))
+--------------------------------
+			      10
+
+SQL> define current_date = select to_number(to_char(sysdate, 'dd')) from dual;
+SQL> select current_date + 20 from dual;
+
+CURRENT_D
+---------
+31-OCT-17
+
+SQL> select to_number(to_char(sysdate, 'dd')) + 15 from dual;
+
+TO_NUMBER(TO_CHAR(SYSDATE,'DD'))+15
+-----------------------------------
+				 25
+
+SQL> desc sales_order_aswin;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO				   NOT NULL VARCHAR2(6)
+ ORDER_DATE					    DATE
+ CLIENT_NO					    VARCHAR2(6)
+ DELY_ADDR					    VARCHAR2(100)
+ SALESMAN_NO					    VARCHAR2(6)
+ DELY_TYPE					    CHAR(1)
+ BILLED_YN					    CHAR(1)
+ DELY_DATE					    DATE
+ ORDER_STATUS					    VARCHAR2(15)
+
+SQL> select dely_date - order_date from sales_order_aswin;
+
+DELY_DATE-ORDER_DATE
+--------------------
+		   8
+		   2
+		   2
+		   4
+		   2
+		   2
+
+6 rows selected.
+
+SQL> select user from dual
+  2  
+SQL> select user from dual;
+
+USER
+------------------------------
+USER1
+

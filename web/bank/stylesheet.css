@@ -1,0 +1,18 @@
+.basic_data
+{
+    width: 35%;
+    padding: 10px;
+    margin: auto;
+}
+
+.right_align
+{
+   float: right; 
+}
+
+h1
+{
+    text-align: center;
+    color: grey;
+    background: #2c3e50;
+}

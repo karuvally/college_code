@@ -1,0 +1,124 @@
+SQL> select * from item_order_aswin;
+
+CUST_NAME       ADDRESS         ITEM                 PRICE                      
+--------------- --------------- --------------- ----------                      
+Basu            Worli           Monitor               1000                      
+Ivan            Juhu            Keyboard               800                      
+Ivan            Worli           Printer               1500                      
+Bryross         Wandon          Printer               1500                      
+Basu            Dadar           Mouse                  500                      
+Vandana         Wandon          Monitor               1000                      
+Vandana         Wandon          Keyboard               800                      
+Bayross         Juhu            Mouse                  500                      
+
+8 rows selected.
+
+SQL> select item, sum
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select item, sum(price) from item_order_aswin order by(item);
+select item, sum(price) from item_order_aswin order by(item)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select item, sum(price) from item_order_aswin orderby(item);
+select item, sum(price) from item_order_aswin orderby(item)
+                                                     *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select item, sum(price) from item_order_aswin group by(item);
+
+ITEM            SUM(PRICE)                                                      
+--------------- ----------                                                      
+Printer               3000                                                      
+Mouse                 1000                                                      
+Keyboard              1600                                                      
+Monitor               2000                                                      
+
+SQL> select cust_name, count(item) from item_order_aswin;
+select cust_name, count(item) from item_order_aswin
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select cust_name, count(item) from item_order_aswin group by cust_name;
+
+CUST_NAME       COUNT(ITEM)                                                     
+--------------- -----------                                                     
+Vandana                   2                                                     
+Ivan                      2                                                     
+Bayross                   1                                                     
+Basu                      2                                                     
+Bryross                   1                                                     
+
+SQL> select cust_name, count(item) from item_order_aswin group by cust_name where cust_name='Ivan';
+select cust_name, count(item) from item_order_aswin group by cust_name where cust_name='Ivan'
+                                                                       *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select cust_name, count(item) from item_order_aswin where cust_name='Ivan' group by cust_name;
+
+CUST_NAME       COUNT(ITEM)                                                     
+--------------- -----------                                                     
+Ivan                      2                                                     
+
+SQL> select address, count(item) from item_order_aswin where address='Juhu' group by address;
+
+ADDRESS         COUNT(ITEM)                                                     
+--------------- -----------                                                     
+Juhu                      2                                                     
+
+SQL> select cust_name, sum(price) from item_order_aswin where sum(price) > 200 group by cust_name;
+select cust_name, sum(price) from item_order_aswin where sum(price) > 200 group by cust_name
+                                                         *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> select cust_name, sum(price) from item_order_aswin group by cust_name;
+
+CUST_NAME       SUM(PRICE)                                                      
+--------------- ----------                                                      
+Vandana               1800                                                      
+Ivan                  2300                                                      
+Bayross                500                                                      
+Basu                  1500                                                      
+Bryross               1500                                                      
+
+SQL> select cust_name, sum(price) from item_order_aswin where sum(price) > 200;
+select cust_name, sum(price) from item_order_aswin where sum(price) > 200
+                                                         *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> select cust_name, sum(price) from item_order_aswin having sum(price) > 200;
+select cust_name, sum(price) from item_order_aswin having sum(price) > 200
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select cust_name, sum(price) from item_order_aswin having sum(price) > 200 group by cust_name;
+
+CUST_NAME       SUM(PRICE)                                                      
+--------------- ----------                                                      
+Vandana               1800                                                      
+Ivan                  2300                                                      
+Bayross                500                                                      
+Basu                  1500                                                      
+Bryross               1500                                                      
+
+SQL> spool off

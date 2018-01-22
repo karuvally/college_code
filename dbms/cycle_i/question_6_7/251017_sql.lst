@@ -1,0 +1,218 @@
+SQL> desc clientmaster_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CLIENT_NO                                 NOT NULL VARCHAR2(6)
+ NAME                                      NOT NULL VARCHAR2(15)
+ ADDRESS_1                                          VARCHAR2(100)
+ ADDRESS_2                                          VARCHAR2(100)
+ CITY                                               VARCHAR2(15)
+ PINCODE                                            NUMBER(38)
+ STATE                                              VARCHAR2(15)
+ BAL_DUE                                            NUMBER(38)
+
+SQL> dual
+SP2-0042: unknown command "dual" - rest of line ignored.
+SQL> desc order_master_aswin;
+ERROR:
+ORA-04043: object order_master_aswin does not exist 
+
+
+SQL> desc orders_aswin;
+ERROR:
+ORA-04043: object orders_aswin does not exist 
+
+
+SQL> select name from clientmaster_aswin where client_no in (select client_no from sales_order_aswin where order_no like 'o19001');
+
+NAME                                                                            
+---------------                                                                 
+Ivan Bayross                                                                    
+
+SQL> desc sales_order_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                  NOT NULL VARCHAR2(6)
+ ORDER_DATE                                         DATE
+ CLIENT_NO                                          VARCHAR2(6)
+ DELY_ADDR                                          VARCHAR2(100)
+ SALESMAN_NO                                        VARCHAR2(6)
+ DELY_TYPE                                          CHAR(1)
+ BILLED_YN                                          CHAR(1)
+ DELY_DATE                                          DATE
+ ORDER_STATUS                                       VARCHAR2(15)
+
+SQL> select order_date from sales_order_aswin where order_date < '01-may-96';
+
+ORDER_DAT                                                                       
+---------                                                                       
+12-JAN-96                                                                       
+25-JAN-96                                                                       
+18-FEB-96                                                                       
+03-APR-96                                                                       
+
+SQL> select name from clientmaster_aswin where client_no in (select client_no from sales_order_aswin where order_date < '01-may-96');
+
+NAME                                                                            
+---------------                                                                 
+Ivan Bayross                                                                    
+Vandana Saitwa                                                                  
+Pramadajagust                                                                   
+
+SQL> desc product_master_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCT_NO                                NOT NULL VARCHAR2(6)
+ DESCRIPTION                               NOT NULL VARCHAR2(100)
+ PROFIT_PERCENT                                     NUMBER(38)
+ UNIT_MEASURE                                       VARCHAR2(15)
+ QTY_ON_HAND                                        NUMBER(38)
+ REORDER_LVL                                        NUMBER(38)
+ SELL_PRICE                                         NUMBER(38)
+ COST_PRICE                                         NUMBER(38)
+
+SQL> select description from product_master_aswin;
+
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+1.44 floppies                                                                   
+Monitors                                                                        
+Mouse                                                                           
+Keyboards                                                                       
+CD Drive                                                                        
+540 HDD                                                                         
+
+6 rows selected.
+
+SQL> desc sales_order_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                  NOT NULL VARCHAR2(6)
+ ORDER_DATE                                         DATE
+ CLIENT_NO                                          VARCHAR2(6)
+ DELY_ADDR                                          VARCHAR2(100)
+ SALESMAN_NO                                        VARCHAR2(6)
+ DELY_TYPE                                          CHAR(1)
+ BILLED_YN                                          CHAR(1)
+ DELY_DATE                                          DATE
+ ORDER_STATUS                                       VARCHAR2(15)
+
+SQL> desc sales_order_details_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                           VARCHAR2(6)
+ PRODUCT_NO                                         VARCHAR2(6)
+ QTY_ORDERED                                        NUMBER(38)
+ QTY_NUMBER                                         NUMBER(38)
+ PRODUCT_RATE                                       NUMBER(38)
+
+SQL> select client_no, name from clientmaster_aswin where client_no in (select client_no from sales_order_aswin where order_no in (select order_no from sales_order_details_aswin where product_no in (select product_no from product_master_aswin where description like '1.44 floppies')));
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+c00001 Ivan Bayross                                                             
+c00002 Vandana Saitwa                                                           
+c00003 Pramadajagust                                                            
+c00005 Ravisreedharan                                                           
+
+SQL> desc sales_order_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                  NOT NULL VARCHAR2(6)
+ ORDER_DATE                                         DATE
+ CLIENT_NO                                          VARCHAR2(6)
+ DELY_ADDR                                          VARCHAR2(100)
+ SALESMAN_NO                                        VARCHAR2(6)
+ DELY_TYPE                                          CHAR(1)
+ BILLED_YN                                          CHAR(1)
+ DELY_DATE                                          DATE
+ ORDER_STATUS                                       VARCHAR2(15)
+
+SQL> desc sales_order_details_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                           VARCHAR2(6)
+ PRODUCT_NO                                         VARCHAR2(6)
+ QTY_ORDERED                                        NUMBER(38)
+ QTY_NUMBER                                         NUMBER(38)
+ PRODUCT_RATE                                       NUMBER(38)
+
+SQL> desc product_master_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCT_NO                                NOT NULL VARCHAR2(6)
+ DESCRIPTION                               NOT NULL VARCHAR2(100)
+ PROFIT_PERCENT                                     NUMBER(38)
+ UNIT_MEASURE                                       VARCHAR2(15)
+ QTY_ON_HAND                                        NUMBER(38)
+ REORDER_LVL                                        NUMBER(38)
+ SELL_PRICE                                         NUMBER(38)
+ COST_PRICE                                         NUMBER(38)
+
+SQL> select product_no, qty_ordered from sales_order_details_aswin;
+
+PRODUC QTY_ORDERED                                                              
+------ -----------                                                              
+p00001           4                                                              
+p00001          10                                                              
+p00001          10                                                              
+p03453           4                                                              
+p03453           2                                                              
+p00001          10                                                              
+
+6 rows selected.
+
+SQL> select product_no from product_master_aswin where product_no not in (select product_no from sales_order_details_aswin);
+
+PRODUC                                                                          
+------                                                                          
+p45123                                                                          
+p35412                                                                          
+p45789                                                                          
+p44783                                                                          
+
+SQL> select product_no, description from product_master_aswin where product_no not in (select product_no from sales_order_details_aswin);
+
+PRODUC                                                                          
+------                                                                          
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+p35412                                                                          
+540 HDD                                                                         
+                                                                                
+p44783                                                                          
+Keyboards                                                                       
+                                                                                
+p45123                                                                          
+CD Drive                                                                        
+                                                                                
+
+PRODUC                                                                          
+------                                                                          
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+p45789                                                                          
+Mouse                                                                           
+                                                                                
+
+SQL> desc clientmaster_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CLIENT_NO                                 NOT NULL VARCHAR2(6)
+ NAME                                      NOT NULL VARCHAR2(15)
+ ADDRESS_1                                          VARCHAR2(100)
+ ADDRESS_2                                          VARCHAR2(100)
+ CITY                                               VARCHAR2(15)
+ PINCODE                                            NUMBER(38)
+ STATE                                              VARCHAR2(15)
+ BAL_DUE                                            NUMBER(38)
+
+SQL> desc sales_order_details_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                           VARCHAR2(6)
+ PRODUCT_NO                                         VARCHAR2(6)
+ QTY_ORDERED                                        NUMBER(38)
+ QTY_NUMBER                                         NUMBER(38)
+ PRODUCT_RATE                                       NUMBER(38)
+
+SQL> spool off

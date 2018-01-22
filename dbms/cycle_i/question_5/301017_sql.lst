@@ -1,0 +1,200 @@
+SQL> create table item_order_aswin(cust_name varchar(15), address varchar(15), item varchar(15), price int);
+
+Table created.
+
+SQL> insert into Basu values('Basu', 'Worli', 'Monitor', '1000');
+insert into Basu values('Basu', 'Worli', 'Monitor', '1000')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> insert into item_order_aswin values('Basu', 'Worli', 'Monitor', '1000');
+
+1 row created.
+
+SQL> insert into item_order_aswin values(
+  2  'Ivan', 'Juhu', 'Keyboard', '800');
+
+1 row created.
+
+SQL> insert into item_order_aswin values(
+  2  'Ivan', 'Worli', 'Printer', '1500');
+
+1 row created.
+
+SQL> insert into item_order_aswin values(
+  2  'Bryross', 'Wandon', 'Printer', '1500');
+
+1 row created.
+
+SQL> insert into item_order_aswin values('Basu', 'Dadar', 'Mouse', '500');
+
+1 row created.
+
+SQL> insert into item_order_aswin values('Vandana', 'Wandon', 'Monitor', '1000');
+
+1 row created.
+
+SQL> insert into item_order_aswin values(
+  2  'Vandana', 'Wandon', 'Keyboard', '800');
+
+1 row created.
+
+SQL> insert into item_order_aswin values('Bayross', 'Juhu', 'Mouse', '500');
+
+1 row created.
+
+SQL> select * from item_order_aswin;
+
+CUST_NAME       ADDRESS         ITEM                 PRICE                      
+--------------- --------------- --------------- ----------                      
+Basu            Worli           Monitor               1000                      
+Ivan            Juhu            Keyboard               800                      
+Ivan            Worli           Printer               1500                      
+Bryross         Wandon          Printer               1500                      
+Basu            Dadar           Mouse                  500                      
+Vandana         Wandon          Monitor               1000                      
+Vandana         Wandon          Keyboard               800                      
+Bayross         Juhu            Mouse                  500                      
+
+8 rows selected.
+
+SQL> select cust_name from item_order_aswin group by item;
+select cust_name from item_order_aswin group by item
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select cust_name from item_order_aswin group by item;
+select cust_name from item_order_aswin group by item
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select cust_name from item_order_aswin groupby;
+
+CUST_NAME                                                                       
+---------------                                                                 
+Basu                                                                            
+Ivan                                                                            
+Ivan                                                                            
+Bryross                                                                         
+Basu                                                                            
+Vandana                                                                         
+Vandana                                                                         
+Bayross                                                                         
+
+8 rows selected.
+
+SQL> select cust_name from item_order_aswin groupby item;
+select cust_name from item_order_aswin groupby item
+                                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select cust_name from item_order_aswin group by;
+select cust_name from item_order_aswin group by
+                                              *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select cust_name from item_order_aswin group by item;
+select cust_name from item_order_aswin group by item
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select item from item_order_aswin group by item;
+
+ITEM                                                                            
+---------------                                                                 
+Printer                                                                         
+Mouse                                                                           
+Keyboard                                                                        
+Monitor                                                                         
+
+SQL> select item, cust_name from item_order_aswin group by item;
+select item, cust_name from item_order_aswin group by item
+             *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> desc item_order_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_NAME                                          VARCHAR2(15)
+ ADDRESS                                            VARCHAR2(15)
+ ITEM                                               VARCHAR2(15)
+ PRICE                                              NUMBER(38)
+
+SQL> select item, sum(price) from item_order_aswin group by item;
+
+ITEM            SUM(PRICE)                                                      
+--------------- ----------                                                      
+Printer               3000                                                      
+Mouse                 1000                                                      
+Keyboard              1600                                                      
+Monitor               2000                                                      
+
+SQL> select cust_name, item from item_order_aswin group by cust_name;
+select cust_name, item from item_order_aswin group by cust_name
+                  *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> desc item_order_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_NAME                                          VARCHAR2(15)
+ ADDRESS                                            VARCHAR2(15)
+ ITEM                                               VARCHAR2(15)
+ PRICE                                              NUMBER(38)
+
+SQL> select cust_name, sum(price) from item_order_aswin;
+select cust_name, sum(price) from item_order_aswin
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select cust_name, sum(price) from item_order_aswin group by cust_name;
+
+CUST_NAME       SUM(PRICE)                                                      
+--------------- ----------                                                      
+Vandana               1800                                                      
+Ivan                  2300                                                      
+Bayross                500                                                      
+Basu                  1500                                                      
+Bryross               1500                                                      
+
+SQL> select cust_name, item from item_order_aswin order by cust_name;
+
+CUST_NAME       ITEM                                                            
+--------------- ---------------                                                 
+Basu            Monitor                                                         
+Basu            Mouse                                                           
+Bayross         Mouse                                                           
+Bryross         Printer                                                         
+Ivan            Keyboard                                                        
+Ivan            Printer                                                         
+Vandana         Monitor                                                         
+Vandana         Keyboard                                                        
+
+8 rows selected.
+
+SQL> select item, address from item_order_aswin group by address;
+select item, address from item_order_aswin group by address
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> spool off

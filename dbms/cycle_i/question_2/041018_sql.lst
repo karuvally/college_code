@@ -1,0 +1,902 @@
+SQL> alter table sales_order_table add check(dely_date > order_date);
+alter table sales_order_table add check(dely_date > order_date)
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> alter table sales_order_table_aswin add check(dely_date > order_date);
+alter table sales_order_table_aswin add check(dely_date > order_date)
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> alter table sales_order_aswin add check(dely_date > order_date);
+
+Table altered.
+
+SQL> alter table product_master_aswin modify product_no varchar(6);
+
+Table altered.
+
+SQL> alter table sales_master_aswin modify salesman_no varchar(6);
+alter table sales_master_aswin modify salesman_no varchar(6)
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> alter table salesman_master_aswin modify salesman_no varchar(6);
+
+Table altered.
+
+SQL> alter table sales_order_aswin modify order_no varchar(6);
+
+Table altered.
+
+SQL> insert into client_master_aswin values(
+  2  C00001,
+  3  
+SQL> select * from client_master_aswin;
+select * from client_master_aswin
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from client_master_aswin;
+select * from client_master_aswin
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from clientmaster_aswin values;
+select * from clientmaster_aswin values
+                                 *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select * from clientmaster_aswin;
+
+no rows selected
+
+SQL> insert into clientmaster_aswin values('C00001', 'Ivan Bayross', 'Wandon', 'Worli', 'Mumbai', '450005', 'Maharashtra', '15000');
+insert into clientmaster_aswin values('C00001', 'Ivan Bayross', 'Wandon', 'Worli', 'Mumbai', '450005', 'Maharashtra', '15000')
+*
+ERROR at line 1:
+ORA-02290: check constraint (USER1.SYS_C0014339) violated 
+
+
+SQL> insert into clientmaster_aswin values('C00001', 'Ivan Bayross', 'Wandon', 'Worli', 'Mumbai', '450005', 'Maharashtra', '15000')
+  2  
+SQL> select * from clientmaster_aswin;
+
+no rows selected
+
+SQL> insert into clientmaster_aswin values(
+  2  'C00001',
+  3  'Ivan Bayross',
+  4  'Wandon',
+  5  'Worli',
+  6  'Mumbai',
+  7  '450005',
+  8  'Maharashtra',
+  9  '15000');
+insert into clientmaster_aswin values(
+*
+ERROR at line 1:
+ORA-02290: check constraint (USER1.SYS_C0014339) violated 
+
+
+SQL> insert into clientmaster_aswin values(
+  2  'C0001',
+  3  'Ivan Bayross',
+  4  'Wandon',
+  5  'Worli',
+  6  'Mumbai',
+  7  '450005',
+  8  'Maharashtra',
+  9  '15000');
+insert into clientmaster_aswin values(
+*
+ERROR at line 1:
+ORA-02290: check constraint (USER1.SYS_C0014339) violated 
+
+
+SQL> desc clientmaster_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CLIENT_NO                                 NOT NULL VARCHAR2(6)
+ NAME                                      NOT NULL VARCHAR2(15)
+ ADDRESS_1                                          VARCHAR2(100)
+ ADDRESS_2                                          VARCHAR2(100)
+ CITY                                               VARCHAR2(15)
+ PINCODE                                            NUMBER(38)
+ STATE                                              VARCHAR2(15)
+ BAL_DUE                                            NUMBER(38)
+
+SQL> insert into clientmaster_aswin values(
+  2  'c00001',
+  3  'Ivan Bayross',
+  4  'Wandon',
+  5  'Worli',
+  6  'Mumbai',
+  7  '450005',
+  8  'Maharashtra',
+  9  '15000');
+
+1 row created.
+
+SQL> insert into clientmaster_aswin values(
+  2  'c00002', 'Vandana Saitwa', 'Don Street', 'Bandra', 'Madras', '780001', 'TamilNadu', '0');
+
+1 row created.
+
+SQL> insert into clientmaster_aswin values('c00003', 'Pramadajagust', 'Mandon', 'Dadar', 'Mumbai', '450007', 'Maharashtra', '5000');
+
+1 row created.
+
+SQL> insert into clientmaster_aswin values('c00004', 'Basu navindgi', 'Jerome', 'Juhu', 'Mumbai', '450009', 'Maharshtra', '0');
+
+1 row created.
+
+SQL> insert into clientmaster_aswin values('c00005', 'Ravisreedharan', 'Dadar', 'Dadra', 'Delhi', '100003', 'Delhi', '2000');
+
+1 row created.
+
+SQL> insert into clientmaster_aswin values('c00006', 'Rukmini', 'Rourk', 'Bandra', 'Mumbai', '450002', 'Maharashtra', '0');
+
+1 row created.
+
+SQL> select * from clientmaster_aswin;
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00001 Ivan Bayross                                                             
+Wandon                                                                          
+Worli                                                                           
+Mumbai              450005 Maharashtra          15000                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00002 Vandana Saitwa                                                           
+Don Street                                                                      
+Bandra                                                                          
+Madras              780001 TamilNadu                0                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00003 Pramadajagust                                                            
+Mandon                                                                          
+Dadar                                                                           
+Mumbai              450007 Maharashtra           5000                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00004 Basu navindgi                                                            
+Jerome                                                                          
+Juhu                                                                            
+Mumbai              450009 Maharshtra               0                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00005 Ravisreedharan                                                           
+Dadar                                                                           
+Dadra                                                                           
+Delhi               100003 Delhi                 2000                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00006 Rukmini                                                                  
+Rourk                                                                           
+Bandra                                                                          
+Mumbai              450002 Maharashtra              0                           
+                                                                                
+
+6 rows selected.
+
+SQL> alter table product_master_aswin modify unit_measure varchar(15);
+
+Table altered.
+
+SQL> insert into product_master_aswin values('p00001', '1.44 floppies', '5', 'Piece', '100', '20', '525', '500');
+
+1 row created.
+
+SQL> insert into product_master_aswin values('p03453', 'Monitors', '6', 'Piece', '10', '3', '12000', '11280');
+
+1 row created.
+
+SQL> insert into product_master_aswin values('p45789', 'Mouse', '5', 'Piece', '20', '5', '1050', '1000');
+
+1 row created.
+
+SQL> insert into product_master_aswin values('p44783', 'Keyboards', '5', 'Piece', '100', 20', '3150', '3050');
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert into product_master_aswin values('p44783', 'Keyboards', '5', 'Piece', '100', '20', '3150', '3050');
+
+1 row created.
+
+SQL> insert into product_master_aswin values('p45123', 'CD Drive', '2', 'Piece', '10', '3', '5250', '5100');
+
+1 row created.
+
+SQL> insert into product_master_aswin values('p35412', '540 HDD', '2.5', 'Piece', '10', '3', '8400', '8000');
+
+1 row created.
+
+SQL> select * from product_master_aswin;
+
+PRODUC                                                                          
+------                                                                          
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+PROFIT_PERCENT UNIT_MEASURE    QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE    
+-------------- --------------- ----------- ----------- ---------- ----------    
+p00001                                                                          
+1.44 floppies                                                                   
+             5 Piece                   100          20        525        500    
+                                                                                
+p03453                                                                          
+Monitors                                                                        
+             6 Piece                    10           3      12000      11280    
+
+PRODUC                                                                          
+------                                                                          
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+PROFIT_PERCENT UNIT_MEASURE    QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE    
+-------------- --------------- ----------- ----------- ---------- ----------    
+                                                                                
+p45789                                                                          
+Mouse                                                                           
+             5 Piece                    20           5       1050       1000    
+                                                                                
+p44783                                                                          
+Keyboards                                                                       
+
+PRODUC                                                                          
+------                                                                          
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+PROFIT_PERCENT UNIT_MEASURE    QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE    
+-------------- --------------- ----------- ----------- ---------- ----------    
+             5 Piece                   100          20       3150       3050    
+                                                                                
+p45123                                                                          
+CD Drive                                                                        
+             2 Piece                    10           3       5250       5100    
+                                                                                
+p35412                                                                          
+
+PRODUC                                                                          
+------                                                                          
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+PROFIT_PERCENT UNIT_MEASURE    QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE    
+-------------- --------------- ----------- ----------- ---------- ----------    
+540 HDD                                                                         
+             3 Piece                    10           3       8400       8000    
+                                                                                
+
+6 rows selected.
+
+SQL> insert into salesman_master_values('s00001', 'Kiran', 'a/14', 'Worli', '450001', 'Bombay', '3000', '100', '50', 'Good');
+insert into salesman_master_values('s00001', 'Kiran', 'a/14', 'Worli', '450001', 'Bombay', '3000', '100', '50', 'Good')
+                                   *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into salesman_master values('s00001', 'Kiran', 'a/14', 'Worli', '450001', 'Bombay', '3000', '100', '50', 'Good');
+insert into salesman_master values('s00001', 'Kiran', 'a/14', 'Worli', '450001', 'Bombay', '3000', '100', '50', 'Good')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from salesman_master_aswin;
+
+no rows selected
+
+SQL> insert into salesman_master_aswin values('s00001', 'Kiran', 'a/14', 'Worli', '450001', 'Bombay', '3000', '100', '50', 'Good');
+
+1 row created.
+
+SQL> insert into salesman_master_aswin values('s00002', 'Maneesh', 'j-65', 'Nariman', '450001', 'Bombay', '3000', '200', '100', 'Good');
+
+1 row created.
+
+SQL> insert into salesman_master_aswin values('s00003', 'Ravi', 'p-7', 'Bandra', '400003', 'Bombay', '3000', '200', '100', 'Good');
+
+1 row created.
+
+SQL> insert into salesman_master_aswin values('s00004', 'Ashish', 'a/5', 'Juhu', '400041', 'Bombay', '3000', '200', '150', 'Good');
+
+1 row created.
+
+SQL> select * from salesman_master_aswin;
+
+SALESM SALESMAN_NAME                                                            
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              SAL_AMT TGT_TO_GET  TTD_SALES     
+--------------- ---------- --------------- ---------- ---------- ----------     
+REMARKS                                                                         
+--------------------------------------------------------------------------------
+s00001 Kiran                                                                    
+a/14                                                                            
+Worli               450001 Bombay                3000        100         50     
+Good                                                                            
+                                                                                
+
+SALESM SALESMAN_NAME                                                            
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              SAL_AMT TGT_TO_GET  TTD_SALES     
+--------------- ---------- --------------- ---------- ---------- ----------     
+REMARKS                                                                         
+--------------------------------------------------------------------------------
+s00002 Maneesh                                                                  
+j-65                                                                            
+Nariman             450001 Bombay                3000        200        100     
+Good                                                                            
+                                                                                
+
+SALESM SALESMAN_NAME                                                            
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              SAL_AMT TGT_TO_GET  TTD_SALES     
+--------------- ---------- --------------- ---------- ---------- ----------     
+REMARKS                                                                         
+--------------------------------------------------------------------------------
+s00003 Ravi                                                                     
+p-7                                                                             
+Bandra              400003 Bombay                3000        200        100     
+Good                                                                            
+                                                                                
+
+SALESM SALESMAN_NAME                                                            
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              SAL_AMT TGT_TO_GET  TTD_SALES     
+--------------- ---------- --------------- ---------- ---------- ----------     
+REMARKS                                                                         
+--------------------------------------------------------------------------------
+s00004 Ashish                                                                   
+a/5                                                                             
+Juhu                400041 Bombay                3000        200        150     
+Good                                                                            
+                                                                                
+
+SQL> select salesman_name from salesman_master_aswin;
+
+SALESMAN_NAME                                                                   
+---------------                                                                 
+Kiran                                                                           
+Maneesh                                                                         
+Ravi                                                                            
+Ashish                                                                          
+
+SQL> insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process');
+insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process')
+                                                            *
+ERROR at line 1:
+ORA-12899: value too large for column "USER1"."SALES_ORDER_ASWIN"."CLIENT_NO" 
+(actual: 6, maximum: 5) 
+
+
+SQL> alter table sales_order modify order_no varchar(6);
+
+Table altered.
+
+SQL> alter table sales_order modify client_no varchar(6);
+
+Table altered.
+
+SQL> alter table sales_order modify salesman_no varchar(6);
+
+Table altered.
+
+SQL> insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process');
+insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process')
+                                                            *
+ERROR at line 1:
+ORA-12899: value too large for column "USER1"."SALES_ORDER_ASWIN"."CLIENT_NO" 
+(actual: 6, maximum: 5) 
+
+
+SQL> insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process');
+insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process')
+                                                            *
+ERROR at line 1:
+ORA-12899: value too large for column "USER1"."SALES_ORDER_ASWIN"."CLIENT_NO" 
+(actual: 6, maximum: 5) 
+
+
+SQL> insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process');
+insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process')
+                                                            *
+ERROR at line 1:
+ORA-12899: value too large for column "USER1"."SALES_ORDER_ASWIN"."CLIENT_NO" 
+(actual: 6, maximum: 5) 
+
+
+SQL> insert into sales_order_aswin values('o1901', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process');
+insert into sales_order_aswin values('o1901', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process')
+                                                           *
+ERROR at line 1:
+ORA-12899: value too large for column "USER1"."SALES_ORDER_ASWIN"."CLIENT_NO" 
+(actual: 6, maximum: 5) 
+
+
+SQL> insert into sales_order_aswin values('o19001', '12-jan-96', 'c0001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process');
+insert into sales_order_aswin values('o19001', '12-jan-96', 'c0001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process')
+                                                                               *
+ERROR at line 1:
+ORA-12899: value too large for column "USER1"."SALES_ORDER_ASWIN"."SALESMAN_NO" 
+(actual: 6, maximum: 5) 
+
+
+SQL> delete
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00903: invalid table name 
+
+
+SQL> delete * from sales_order;
+delete * from sales_order
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> delete * from sales_order_aswin;
+delete * from sales_order_aswin
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> delete * from sales_order_aswin;
+delete * from sales_order_aswin
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> delete
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00903: invalid table name 
+
+
+SQL> help(delete);
+SP2-0172: No HELP matching this topic was found.
+SQL> help delete;
+SP2-0172: No HELP matching this topic was found.
+SQL> delete from sales_order_aswin where order_no like 'o%';
+
+0 rows deleted.
+
+SQL> delete from sales_order_aswin where order_no like '12%';
+
+0 rows deleted.
+
+SQL> select * from sales_order_aswin;
+
+no rows selected
+
+SQL> alter table sales_order_aswin modify client_no varchar(6);
+
+Table altered.
+
+SQL> insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process');
+insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process')
+                                                                                *
+ERROR at line 1:
+ORA-12899: value too large for column "USER1"."SALES_ORDER_ASWIN"."SALESMAN_NO" 
+(actual: 6, maximum: 5) 
+
+
+SQL> alter table sales_order_aswin modify salesman_no varchar(6);
+
+Table altered.
+
+SQL> insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process');
+insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'In Process')
+*
+ERROR at line 1:
+ORA-02290: check constraint (USER1.SYS_C0014688) violated 
+
+
+SQL> insert into sales_order_aswin values('o19001', '12-jan-96', 'c00001', 'Wandon', 's00001', 'F', 'N', '20-jan-96', 'in process');
+
+1 row created.
+
+SQL> insert into sales_order_aswin values('o19002', '25-jan-96', 'c00002', 'Don Street', 's00002', 'P', 'N', '27-jan-96', 'cancelled');
+
+1 row created.
+
+SQL> insert into sales_order_aswin values('o46865', '18-feb-96', 'c00003', 'Mandon', 's00003', 'F', 'Y', '20-feb-96', 'fulfilled');
+
+1 row created.
+
+SQL> insert into sales_order_aswin values('o19003', '03-apr-96', 'c00001', 'Jerome', 's00001', 'F', 'Y', '07-apr-96', 'fulfilled');
+
+1 row created.
+
+SQL> insert into sales_order_aswin values('o46866', '20-may-96', 'c00004', 'Dadar', 's00002', 'P', 'N', '22-may-96', 'cancelled');
+
+1 row created.
+
+SQL> insert into sales_order_aswin values('o19008', '24-may-96', 'c00005', 'Rourk', 's00004', 'F', 'N', '26-may-96', 'in process');
+
+1 row created.
+
+SQL> select order_no from sales_order_aswin;
+
+ORDER_                                                                          
+------                                                                          
+o19001                                                                          
+o19002                                                                          
+o19003                                                                          
+o19008                                                                          
+o46865                                                                          
+o46866                                                                          
+
+6 rows selected.
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> select product_no from product_master_aswin;
+
+PRODUC                                                                          
+------                                                                          
+p00001                                                                          
+p03453                                                                          
+p35412                                                                          
+p44783                                                                          
+p45123                                                                          
+p45789                                                                          
+
+6 rows selected.
+
+SQL> select order_no from sales_order_aswin;
+
+ORDER_                                                                          
+------                                                                          
+o19001                                                                          
+o19002                                                                          
+o19003                                                                          
+o19008                                                                          
+o46865                                                                          
+o46866                                                                          
+
+6 rows selected.
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o1901', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o1901', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o1901', 'p0001', '4', '4', '525');
+insert into sales_order_details values('o1901', 'p0001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o1901', 'p0234234001', '4', '4', '525');
+insert into sales_order_details values('o1901', 'p0234234001', '4', '4', '525')
+                                                *
+ERROR at line 1:
+ORA-12899: value too large for column 
+"USER1"."SALES_ORDER_DETAILS"."PRODUCT_NO" (actual: 11, maximum: 7) 
+
+
+SQL> insert into sales_order_details values('o1901', 'p023001', '4', '4', '525');
+insert into sales_order_details values('o1901', 'p023001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> desc sales_order_details_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                           VARCHAR2(5)
+ PRODUCT_NO                                         VARCHAR2(5)
+ QTY_ORDERED                                        NUMBER(38)
+ QTY_NUMBER                                         NUMBER(38)
+ PRODUCT_RATE                                       NUMBER(38)
+
+SQL> alter table sales_order_details_aswin add foreign key(order_no) references sales_order_aswin(order_no);
+alter table sales_order_details_aswin add foreign key(order_no) references sales_order_aswin(order_no)
+                                          *
+ERROR at line 1:
+ORA-02275: such a referential constraint already exists in the table 
+
+
+SQL> alter table sales_order_details_aswin add foreign key(product_no) references product_master_aswin(product_no);
+alter table sales_order_details_aswin add foreign key(product_no) references product_master_aswin(product_no)
+                                          *
+ERROR at line 1:
+ORA-02275: such a referential constraint already exists in the table 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> insert into sales_order_details values('o19001', 'p00001', '4', '4', '525');
+insert into sales_order_details values('o19001', 'p00001', '4', '4', '525')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (USER1.SYS_C0014796) violated - parent key not 
+found 
+
+
+SQL> spool off

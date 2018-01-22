@@ -1,0 +1,232 @@
+SQL> select * from employee_aswin;
+
+no rows selected
+
+SQL> create table department(dep_no int, dep_name varchar(10), location varchar(10));
+create table department(dep_no int, dep_name varchar(10), location varchar(10))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> create table department_aswin(dep_no int, dep_name varchar(10), location varchar(10));
+
+Table created.
+
+SQL> create table soft_dev_aswin(emp_no int, package varchar(10), lang varchar(10), dev_cost int, sale_cost int);
+
+Table created.
+
+SQL> create table institution_aswin(emp_no int, institute varchar(10), location varchar(10));
+
+Table created.
+
+SQL> sp_help employee_aswin;
+SP2-0734: unknown command beginning "sp_help em..." - rest of line ignored.
+SQL> sp_help
+SP2-0042: unknown command "sp_help" - rest of line ignored.
+SQL> select column_name from information_schema where table_name = employee_aswin;
+select column_name from information_schema where table_name = employee_aswin
+                        *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> desc employee_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                             NUMBER(38)
+ EMP_NAME                                           VARCHAR2(10)
+ DOB                                                DATE
+ JOB                                                VARCHAR2(10)
+ MANAGER                                            VARCHAR2(10)
+ HIRE_DATE                                          DATE
+ SALARY                                             NUMBER(38)
+ DEP_NO                                             NUMBER(38)
+
+SQL> insert into employee_aswin values(1, 'Arun', '1994-01-01', 'Research', 'Rahul', '2015-02-01', 40000, 1);
+insert into employee_aswin values(1, 'Arun', '1994-01-01', 'Research', 'Rahul', '2015-02-01', 40000, 1)
+                                             *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> insert into employee_aswin values(1, Arun, '1994-01-01', 'Research', 'Rahul', '2015-02-01', 40000, 1);
+insert into employee_aswin values(1, Arun, '1994-01-01', 'Research', 'Rahul', '2015-02-01', 40000, 1)
+                                     *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> insert into employee_aswin values(1, 'Arun', '1994-01-01', 'Research', 'Rahul', '2015-02-01', 40000, 1);
+insert into employee_aswin values(1, 'Arun', '1994-01-01', 'Research', 'Rahul', '2015-02-01', 40000, 1)
+                                             *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> insert into employee_aswin values(1, 'Arun', '01-DEC-94', 'Research', 'Rahul', '01-JAN-15', 40000, 1);
+
+1 row created.
+
+SQL> insert into employee_aswin value(2, 'Rafsal', '02-FEB-96', 'Developer', 'Devika', '03-MAR-16', 45000, 2
+  2  );
+insert into employee_aswin value(2, 'Rafsal', '02-FEB-96', 'Developer', 'Devika', '03-MAR-16', 45000, 2
+                                 *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into employee_aswin values(2, 'Rafsal', '02-FEB-96', 'Developer', 'Devika', '03-MAR-16', 45000, 2);
+
+1 row created.
+
+SQL> insert into employee_aswin values(3, 'Basith', '15-OCT-97', 'Architect', 'Gafoor', '11-APR-93', 34000, 3);
+
+1 row created.
+
+SQL> select * from employee_aswin;
+
+    EMP_NO EMP_NAME   DOB       JOB        MANAGER    HIRE_DATE     SALARY      
+---------- ---------- --------- ---------- ---------- --------- ----------      
+    DEP_NO                                                                      
+----------                                                                      
+         1 Arun       01-DEC-94 Research   Rahul      01-JAN-15      40000      
+         1                                                                      
+                                                                                
+         2 Rafsal     02-FEB-96 Developer  Devika     03-MAR-16      45000      
+         2                                                                      
+                                                                                
+         3 Basith     15-OCT-97 Architect  Gafoor     11-APR-93      34000      
+         3                                                                      
+                                                                                
+
+SQL> select * from employee_aswin;
+
+    EMP_NO EMP_NAME   DOB       JOB        MANAGER    HIRE_DATE     SALARY      
+---------- ---------- --------- ---------- ---------- --------- ----------      
+    DEP_NO                                                                      
+----------                                                                      
+         1 Arun       01-DEC-94 Research   Rahul      01-JAN-15      40000      
+         1                                                                      
+                                                                                
+         2 Rafsal     02-FEB-96 Developer  Devika     03-MAR-16      45000      
+         2                                                                      
+                                                                                
+         3 Basith     15-OCT-97 Architect  Gafoor     11-APR-93      34000      
+         3                                                                      
+                                                                                
+
+SQL> insert into employee_aswin values(4, 'Ashita', '05-OCT-97', 'Designer', 'Sujitha', '25-FEB-16', 33000, 101);
+
+1 row created.
+
+SQL> insert into employee_aswin values(5, 'Gayathri', '16-MAR-95', 'Tester', 'Krishnadev', '22-JAN-16', 37000, 104);
+
+1 row created.
+
+SQL> select * from employee_aswin where dep_no=101;
+
+    EMP_NO EMP_NAME   DOB       JOB        MANAGER    HIRE_DATE     SALARY      
+---------- ---------- --------- ---------- ---------- --------- ----------      
+    DEP_NO                                                                      
+----------                                                                      
+         4 Ashita     05-OCT-97 Designer   Sujitha    25-FEB-16      33000      
+       101                                                                      
+                                                                                
+
+SQL> select * from employee_aswin where dep_no=104;
+
+    EMP_NO EMP_NAME   DOB       JOB        MANAGER    HIRE_DATE     SALARY      
+---------- ---------- --------- ---------- ---------- --------- ----------      
+    DEP_NO                                                                      
+----------                                                                      
+         5 Gayathri   16-MAR-95 Tester     Krishnadev 22-JAN-16      37000      
+       104                                                                      
+                                                                                
+
+SQL> select job from employee_aswin;
+
+JOB                                                                             
+----------                                                                      
+Research                                                                        
+Developer                                                                       
+Architect                                                                       
+Designer                                                                        
+Tester                                                                          
+
+SQL> select emp_name from employee_aswin where emp_name like 'N%' or emp_name like 'S%';
+
+no rows selected
+
+SQL> select emp_name from employee_aswin where emp_name like 'B%';
+
+EMP_NAME                                                                        
+----------                                                                      
+Basith                                                                          
+
+SQL> select emp_name from employee_aswin where emp_name like 'B%' or emp_name like 'R%';
+
+EMP_NAME                                                                        
+----------                                                                      
+Rafsal                                                                          
+Basith                                                                          
+
+SQL> select emp_name, salary from employee_aswin where salary between 25000 and 35000;
+
+EMP_NAME       SALARY                                                           
+---------- ----------                                                           
+Basith          34000                                                           
+Ashita          33000                                                           
+
+SQL> select job from employee_aswin where salary between 40000 and 50000;
+
+JOB                                                                             
+----------                                                                      
+Research                                                                        
+Developer                                                                       
+
+SQL> select job from employee_aswin where salary between 30000 and 35000;
+
+JOB                                                                             
+----------                                                                      
+Architect                                                                       
+Designer                                                                        
+
+SQL> select name, job, salary from employee_aswin where salary between 30000 and 35000;
+select name, job, salary from employee_aswin where salary between 30000 and 35000
+       *
+ERROR at line 1:
+ORA-00904: "NAME": invalid identifier 
+
+
+SQL> select emp_name, job, salary from employee_aswin where salary between 30000 and 35000;
+
+EMP_NAME   JOB            SALARY                                                
+---------- ---------- ----------                                                
+Basith     Architect       34000                                                
+Ashita     Designer        33000                                                
+
+SQL> alter table employee_aswin add primary key(emp_no);
+
+Table altered.
+
+SQL> alter table department_aswin add primary key(dep_no);
+
+Table altered.
+
+SQL> desc sof_dev_aswin;
+ERROR:
+ORA-04043: object sof_dev_aswin does not exist 
+
+
+SQL> desc soft_dev_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                             NUMBER(38)
+ PACKAGE                                            VARCHAR2(10)
+ LANG                                               VARCHAR2(10)
+ DEV_COST                                           NUMBER(38)
+ SALE_COST                                          NUMBER(38)
+
+SQL> spool off

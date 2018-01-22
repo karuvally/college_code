@@ -1,0 +1,69 @@
+body {
+    font-family: Raleway;
+    #background: #ecf0f1;
+}
+
+.top_box {
+    text-align: center;
+    color: #ffffff;
+    margin: 0 auto;
+    background: #3498db;
+    padding: 20px; 
+    width: 90%;
+    height: 90px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.product_box {
+    text-align: center;
+    color: #ffffff;
+    margin: auto;
+    margin-top: 20%;
+    padding: 20px; 
+    width: 240px;
+    height: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);     
+}
+
+#blue {
+    background: #2980b9;
+}
+
+#silver {
+    background: #bdc3c7;
+}
+
+#wet_asphalt {
+    background: #34495e;
+}
+
+#turquoise {
+    background: #1abc9c;
+}
+
+#wisteria {
+    background: #8e44ad;
+}
+
+#alizarin {
+    background: #e74c3c;
+}
+
+#carrot {
+    background: #e67e22;
+}
+
+.column-left {
+    float: left;
+    width: 33%;
+}
+
+.column-right {
+    float: right;
+    width: 33%;
+}
+
+.column-center {
+    display: inline-block;
+    width: 33%;
+}

@@ -1,0 +1,79 @@
+SQL> select * from sales_order_aswin;
+
+ORDER_ ORDER_DAT CLIENT                                                         
+------ --------- ------                                                         
+DELY_ADDR                                                                       
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS                                               
+------ - - --------- ---------------                                            
+o19001 12-JAN-96 c00001                                                         
+Wandon                                                                          
+s00001 F N 20-JAN-96 in process                                                 
+                                                                                
+o19002 25-JAN-96 c00002                                                         
+Don Street                                                                      
+s00002 P N 27-JAN-96 cancelled                                                  
+
+ORDER_ ORDER_DAT CLIENT                                                         
+------ --------- ------                                                         
+DELY_ADDR                                                                       
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS                                               
+------ - - --------- ---------------                                            
+                                                                                
+o46865 18-FEB-96 c00003                                                         
+Mandon                                                                          
+s00003 F Y 20-FEB-96 fulfilled                                                  
+                                                                                
+o19003 03-APR-96 c00001                                                         
+Jerome                                                                          
+
+ORDER_ ORDER_DAT CLIENT                                                         
+------ --------- ------                                                         
+DELY_ADDR                                                                       
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS                                               
+------ - - --------- ---------------                                            
+s00001 F Y 07-APR-96 fulfilled                                                  
+                                                                                
+o46866 20-MAY-96 c00004                                                         
+Dadar                                                                           
+s00002 P N 22-MAY-96 cancelled                                                  
+                                                                                
+o19008 24-MAY-96 c00005                                                         
+
+ORDER_ ORDER_DAT CLIENT                                                         
+------ --------- ------                                                         
+DELY_ADDR                                                                       
+--------------------------------------------------------------------------------
+SALESM D B DELY_DATE ORDER_STATUS                                               
+------ - - --------- ---------------                                            
+Rourk                                                                           
+s00004 F N 26-MAY-96 in process                                                 
+                                                                                
+
+6 rows selected.
+
+SQL> select dely_date from sales_order_aswin;
+
+DELY_DATE                                                                       
+---------                                                                       
+20-JAN-96                                                                       
+27-JAN-96                                                                       
+20-FEB-96                                                                       
+07-APR-96                                                                       
+22-MAY-96                                                                       
+26-MAY-96                                                                       
+
+6 rows selected.
+
+SQL> seelct dely_date from sales_order_aswin where month(dely_date) = 'Jan';
+SP2-0734: unknown command beginning "seelct del..." - rest of line ignored.
+SQL> select dely_date from sales_order_aswin where month(dely_date) = 'Jan';
+select dely_date from sales_order_aswin where month(dely_date) = 'Jan'
+                                              *
+ERROR at line 1:
+ORA-00904: "MONTH": invalid identifier 
+
+
+SQL> 

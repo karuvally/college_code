@@ -1,0 +1,438 @@
+SQL> select name from clientmaster_aswin where client_no in(select client_no from sales_order_aswin where order_no in(select order_no from sales_order_details_aswin where product_no in(select product_no from product_master_aswin where cost_price > 10000)));
+
+NAME                                                                            
+---------------                                                                 
+Ivan Bayross                                                                    
+Pramadajagust                                                                   
+
+SQL> select client_master_view as
+  2  select client_no, name, city from client_master_aswin
+  3  ;
+select client_no, name, city from client_master_aswin
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> create view client_master_view_aswin as
+  2  select client_no, name, city from client_master_aswin;
+select client_no, name, city from client_master_aswin
+                                  *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> create view client_master_view_aswin as
+  2  select client_no, name, city from clientmaster_aswin;
+
+View created.
+
+SQL> select * from client_master_view_aswin;
+
+CLIENT NAME            CITY                                                     
+------ --------------- ---------------                                          
+c00001 Ivan Bayross    Mumbai                                                   
+c00002 Vandana Saitwa  Madras                                                   
+c00003 Pramadajagust   Mumbai                                                   
+c00004 Basu navindgi   Mumbai                                                   
+c00005 Ravisreedharan  Delhi                                                    
+c00006 Rukmini         Mumbai                                                   
+
+6 rows selected.
+
+SQL> update
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00903: invalid table name 
+
+
+SQL> update view;
+update view
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> insert into client_master_view_aswin values('c00007', 'Suhasini', 'Navi');
+
+1 row created.
+
+SQL> select * from client_master_view_aswin;
+
+CLIENT NAME            CITY                                                     
+------ --------------- ---------------                                          
+c00001 Ivan Bayross    Mumbai                                                   
+c00002 Vandana Saitwa  Madras                                                   
+c00003 Pramadajagust   Mumbai                                                   
+c00004 Basu navindgi   Mumbai                                                   
+c00005 Ravisreedharan  Delhi                                                    
+c00006 Rukmini         Mumbai                                                   
+c00007 Suhasini        Navi                                                     
+
+7 rows selected.
+
+SQL> select * from clientmaster_aswin;
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00001 Ivan Bayross                                                             
+Wandon                                                                          
+Worli                                                                           
+Mumbai              450005 Maharashtra          15000                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00002 Vandana Saitwa                                                           
+Don Street                                                                      
+Bandra                                                                          
+Madras              780001 TamilNadu                0                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00003 Pramadajagust                                                            
+Mandon                                                                          
+Dadar                                                                           
+Mumbai              450007 Maharashtra           5000                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00004 Basu navindgi                                                            
+Jerome                                                                          
+Juhu                                                                            
+Mumbai              450009 Maharshtra               0                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00005 Ravisreedharan                                                           
+Dadar                                                                           
+Dadra                                                                           
+Delhi               100003 Delhi                 2000                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00006 Rukmini                                                                  
+Rourk                                                                           
+Bandra                                                                          
+Mumbai              450002 Maharashtra              0                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00007 Suhasini                                                                 
+                                                                                
+                                                                                
+Navi                                                                            
+                                                                                
+
+7 rows selected.
+
+SQL> select * from client_master_aswin_view;
+select * from client_master_aswin_view
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from client_master_view_aswin;
+
+CLIENT NAME            CITY                                                     
+------ --------------- ---------------                                          
+c00001 Ivan Bayross    Mumbai                                                   
+c00002 Vandana Saitwa  Madras                                                   
+c00003 Pramadajagust   Mumbai                                                   
+c00004 Basu navindgi   Mumbai                                                   
+c00005 Ravisreedharan  Delhi                                                    
+c00006 Rukmini         Mumbai                                                   
+c00007 Suhasini        Navi                                                     
+
+7 rows selected.
+
+SQL> update client_master_view_aswin set city="Chennai" where city="Madras";
+update client_master_view_aswin set city="Chennai" where city="Madras"
+                                                              *
+ERROR at line 1:
+ORA-00904: "Madras": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where city="Madras";
+update client_master_view_aswin set city="Chennai" where city="Madras"
+                                                              *
+ERROR at line 1:
+ORA-00904: "Madras": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where city like "Madras";
+update client_master_view_aswin set city="Chennai" where city like "Madras"
+                                                                   *
+ERROR at line 1:
+ORA-00904: "Madras": invalid identifier 
+
+
+SQL> update client_master_view_aswin;
+update client_master_view_aswin
+                              *
+ERROR at line 1:
+ORA-00971: missing SET keyword 
+
+
+SQL> desc client_master_view_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CLIENT_NO                                 NOT NULL VARCHAR2(6)
+ NAME                                      NOT NULL VARCHAR2(15)
+ CITY                                               VARCHAR2(15)
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no like "c00002";
+update client_master_view_aswin set city="Chennai" where client_no like "c00002"
+                                                                        *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no = "c00002";
+update client_master_view_aswin set city="Chennai" where client_no = "c00002"
+                                                                     *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no = "c00002";
+update client_master_view_aswin set city="Chennai" where client_no = "c00002"
+                                                                     *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no = "c00002";
+update client_master_view_aswin set city="Chennai" where client_no = "c00002"
+                                                                     *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no = "c00002";
+update client_master_view_aswin set city="Chennai" where client_no = "c00002"
+                                                                     *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no = "c00002";
+update client_master_view_aswin set city="Chennai" where client_no = "c00002"
+                                                                     *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no = "c00002";
+update client_master_view_aswin set city="Chennai" where client_no = "c00002"
+                                                                     *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no = "c00002";
+update client_master_view_aswin set city="Chennai" where client_no = "c00002"
+                                                                     *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no = "c00002";
+update client_master_view_aswin set city="Chennai" where client_no = "c00002"
+                                                                     *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no like "c00002";
+update client_master_view_aswin set city="Chennai" where client_no like "c00002"
+                                                                        *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no like "c00002";
+update client_master_view_aswin set city="Chennai" where client_no like "c00002"
+                                                                        *
+ERROR at line 1:
+ORA-00904: "c00002": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city="Chennai" where client_no = 'c00002';
+update client_master_view_aswin set city="Chennai" where client_no = 'c00002'
+                                         *
+ERROR at line 1:
+ORA-00904: "Chennai": invalid identifier 
+
+
+SQL> update client_master_view_aswin set city='Chennai' where client_no = 'c00002';
+
+1 row updated.
+
+SQL> select * from client_master_view_aswin;
+
+CLIENT NAME            CITY                                                     
+------ --------------- ---------------                                          
+c00001 Ivan Bayross    Mumbai                                                   
+c00002 Vandana Saitwa  Chennai                                                  
+c00003 Pramadajagust   Mumbai                                                   
+c00004 Basu navindgi   Mumbai                                                   
+c00005 Ravisreedharan  Delhi                                                    
+c00006 Rukmini         Mumbai                                                   
+c00007 Suhasini        Navi                                                     
+
+7 rows selected.
+
+SQL> select * from clientmaster_aswin;
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00001 Ivan Bayross                                                             
+Wandon                                                                          
+Worli                                                                           
+Mumbai              450005 Maharashtra          15000                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00002 Vandana Saitwa                                                           
+Don Street                                                                      
+Bandra                                                                          
+Chennai             780001 TamilNadu                0                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00003 Pramadajagust                                                            
+Mandon                                                                          
+Dadar                                                                           
+Mumbai              450007 Maharashtra           5000                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00004 Basu navindgi                                                            
+Jerome                                                                          
+Juhu                                                                            
+Mumbai              450009 Maharshtra               0                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00005 Ravisreedharan                                                           
+Dadar                                                                           
+Dadra                                                                           
+Delhi               100003 Delhi                 2000                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00006 Rukmini                                                                  
+Rourk                                                                           
+Bandra                                                                          
+Mumbai              450002 Maharashtra              0                           
+                                                                                
+
+CLIENT NAME                                                                     
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              BAL_DUE                           
+--------------- ---------- --------------- ----------                           
+c00007 Suhasini                                                                 
+                                                                                
+                                                                                
+Navi                                                                            
+                                                                                
+
+7 rows selected.
+
+SQL> spool off

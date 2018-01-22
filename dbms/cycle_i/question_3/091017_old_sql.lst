@@ -1,0 +1,247 @@
+SQL> select name salesman_name from salesman_master_aswin;
+select name salesman_name from salesman_master_aswin
+       *
+ERROR at line 1:
+ORA-00904: "NAME": invalid identifier 
+
+
+SQL> select * from salesman_master_aswin;
+
+SALESM SALESMAN_NAME                                                            
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              SAL_AMT TGT_TO_GET  TTD_SALES     
+--------------- ---------- --------------- ---------- ---------- ----------     
+REMARKS                                                                         
+--------------------------------------------------------------------------------
+s00001 Kiran                                                                    
+a/14                                                                            
+Worli               450001 Bombay                3000        100         50     
+Good                                                                            
+                                                                                
+
+SALESM SALESMAN_NAME                                                            
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              SAL_AMT TGT_TO_GET  TTD_SALES     
+--------------- ---------- --------------- ---------- ---------- ----------     
+REMARKS                                                                         
+--------------------------------------------------------------------------------
+s00002 Maneesh                                                                  
+j-65                                                                            
+Nariman             450001 Bombay                3000        200        100     
+Good                                                                            
+                                                                                
+
+SALESM SALESMAN_NAME                                                            
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              SAL_AMT TGT_TO_GET  TTD_SALES     
+--------------- ---------- --------------- ---------- ---------- ----------     
+REMARKS                                                                         
+--------------------------------------------------------------------------------
+s00003 Ravi                                                                     
+p-7                                                                             
+Bandra              400003 Bombay                3000        200        100     
+Good                                                                            
+                                                                                
+
+SALESM SALESMAN_NAME                                                            
+------ ---------------                                                          
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE              SAL_AMT TGT_TO_GET  TTD_SALES     
+--------------- ---------- --------------- ---------- ---------- ----------     
+REMARKS                                                                         
+--------------------------------------------------------------------------------
+s00004 Ashish                                                                   
+a/5                                                                             
+Juhu                400041 Bombay                3000        200        150     
+Good                                                                            
+                                                                                
+
+SQL> select salesman_name from salesman_master_aswin;
+
+SALESMAN_NAME                                                                   
+---------------                                                                 
+Kiran                                                                           
+Maneesh                                                                         
+Ravi                                                                            
+Ashish                                                                          
+
+SQL> select salesman_name from salesman_master_aswin where salesman_name like '?A%'
+  2  ;
+
+no rows selected
+
+SQL> select salesman_name from salesman_master_aswin where salesman_name like '?a%'
+  2  ;
+
+no rows selected
+
+SQL> select salesman_name from salesman_master_aswin where salesman_name like '_a%';
+
+SALESMAN_NAME                                                                   
+---------------                                                                 
+Maneesh                                                                         
+Ravi                                                                            
+
+SQL> desc clientmaster_table;
+ERROR:
+ORA-04043: object clientmaster_table does not exist 
+
+
+SQL> desc clientmaster_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CLIENT_NO                                 NOT NULL VARCHAR2(6)
+ NAME                                      NOT NULL VARCHAR2(15)
+ ADDRESS_1                                          VARCHAR2(100)
+ ADDRESS_2                                          VARCHAR2(100)
+ CITY                                               VARCHAR2(15)
+ PINCODE                                            NUMBER(38)
+ STATE                                              VARCHAR2(15)
+ BAL_DUE                                            NUMBER(38)
+
+SQL> select city from clientmaster_aswin;
+
+CITY                                                                            
+---------------                                                                 
+Mumbai                                                                          
+Madras                                                                          
+Mumbai                                                                          
+Mumbai                                                                          
+Delhi                                                                           
+Mumbai                                                                          
+
+6 rows selected.
+
+SQL> select name, city from clientmaster_aswin where name like 'R%' and city='Delhi';
+
+NAME            CITY                                                            
+--------------- ---------------                                                 
+Ravisreedharan  Delhi                                                           
+
+SQL> select name, address1, address2, city, pincode, state from clientmaster_aswin where city='Delhi' or city='Maharashtra
+  2  ';
+select name, address1, address2, city, pincode, state from clientmaster_aswin where city='Delhi' or city='Maharashtra
+                       *
+ERROR at line 1:
+ORA-00904: "ADDRESS2": invalid identifier 
+
+
+SQL> select name, address_1, address_2, city, pincode, state from clientmaster_aswin where city='Delhi' or city='Maharashtra'
+  2  ;
+
+NAME                                                                            
+---------------                                                                 
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+ADDRESS_2                                                                       
+--------------------------------------------------------------------------------
+CITY               PINCODE STATE                                                
+--------------- ---------- ---------------                                      
+Ravisreedharan                                                                  
+Dadar                                                                           
+Dadra                                                                           
+Delhi               100003 Delhi                                                
+                                                                                
+
+SQL> select name, address_1 from clientmaster_aswin where city='Delhi' or city='Maharashtra'
+  2  ;
+
+NAME                                                                            
+---------------                                                                 
+ADDRESS_1                                                                       
+--------------------------------------------------------------------------------
+Ravisreedharan                                                                  
+Dadar                                                                           
+                                                                                
+
+SQL> select * from product_master_aswin;
+
+PRODUC                                                                          
+------                                                                          
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+PROFIT_PERCENT UNIT_MEASURE    QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE    
+-------------- --------------- ----------- ----------- ---------- ----------    
+p00001                                                                          
+1.44 floppies                                                                   
+             5 Piece                   100          20        525        500    
+                                                                                
+p03453                                                                          
+Monitors                                                                        
+             6 Piece                    10           3      12000      11280    
+
+PRODUC                                                                          
+------                                                                          
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+PROFIT_PERCENT UNIT_MEASURE    QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE    
+-------------- --------------- ----------- ----------- ---------- ----------    
+                                                                                
+p45789                                                                          
+Mouse                                                                           
+             5 Piece                    20           5       1050       1000    
+                                                                                
+p44783                                                                          
+Keyboards                                                                       
+
+PRODUC                                                                          
+------                                                                          
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+PROFIT_PERCENT UNIT_MEASURE    QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE    
+-------------- --------------- ----------- ----------- ---------- ----------    
+             5 Piece                   100          20       3150       3050    
+                                                                                
+p45123                                                                          
+CD Drive                                                                        
+             2 Piece                    10           3       5250       5100    
+                                                                                
+p35412                                                                          
+
+PRODUC                                                                          
+------                                                                          
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+PROFIT_PERCENT UNIT_MEASURE    QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE    
+-------------- --------------- ----------- ----------- ---------- ----------    
+540 HDD                                                                         
+             3 Piece                    10           3       8400       8000    
+                                                                                
+
+6 rows selected.
+
+SQL> select description from product_master_aswin where cost_price > 5000;
+
+DESCRIPTION                                                                     
+--------------------------------------------------------------------------------
+Monitors                                                                        
+CD Drive                                                                        
+540 HDD                                                                         
+
+SQL> desc sales_order_table;
+ERROR:
+ORA-04043: object sales_order_table does not exist 
+
+
+SQL> desc sales_order_aswin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                  NOT NULL VARCHAR2(6)
+ ORDER_DATE                                         DATE
+ CLIENT_NO                                          VARCHAR2(6)
+ DELY_ADDR                                          VARCHAR2(100)
+ SALESMAN_NO                                        VARCHAR2(6)
+ DELY_TYPE                                          CHAR(1)
+ BILLED_YN                                          CHAR(1)
+ DELY_DATE                                          DATE
+ ORDER_STATUS                                       VARCHAR2(15)
+
+SQL> 
+SQL> 
