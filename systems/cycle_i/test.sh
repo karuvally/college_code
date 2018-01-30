@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if (( $1 % 2 == 0 ))
-then
-    echo "even"
-fi
+for argument in $*
+do
+    echo $argument
+done
