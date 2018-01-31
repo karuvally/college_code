@@ -9,7 +9,7 @@ then
 fi
 
 # find the number of occurence
-occurence=`cat $1 | grep -i -o $2 | wc -w`
+occurence=`cat $1 | grep -i -w -o $2 | wc -w`
 
 # print output for non zero occurence
 echo "there are $occurence occurences of the word $2 in $1"
