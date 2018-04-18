@@ -2,7 +2,7 @@
 import java.io.*;
 import java.net.*;
 
-public class client
+public class TCPClient
 {
     public static void main(String[] args)
     {
