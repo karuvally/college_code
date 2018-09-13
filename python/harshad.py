@@ -12,4 +12,7 @@ sum_of_digits = 0
 for digit in [int(x) for x in input_value]:
     sum_of_digits += digit
 
-print(sum_of_digits)
+if int(input_value) % sum_of_digits == 0:
+    print(True)
+else:
+    print(False)
